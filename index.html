@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Kolliner</title>
+  <meta name="description" content="Daniel Kolliner — Wright Family Assistant Professor of Economics at Kenyon College. Research in political economy and public economics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+      --ink: #1a1a18;
+      --muted: #555550;
+      --faint: #999990;
+      --rule: rgba(0,0,0,0.12);
+      --bg: #faf9f7;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #e8e6e0;
+        --muted: #a8a49c;
+        --faint: #666660;
+        --rule: rgba(255,255,255,0.1);
+        --bg: #181816;
+      }
+    }
+
+    html { font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 0 1.5rem;
+    }
+
+    .site {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 0 5rem;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 1.25rem;
+      border-bottom: 0.5px solid var(--rule);
+      margin-bottom: 2.75rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2.75rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+    .hero .role {
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+    .hero .inst {
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 1.25rem;
+    }
+    .hero p {
+      font-size: 0.94rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .hero p + p { margin-top: 0.75rem; }
+
+    /* Headshot placeholder */
+    .avatar-wrap {
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 0.5px solid var(--rule);
+      display: block;
+    }
+    /* shown when img fails or src is placeholder */
+    .avatar-placeholder {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 0.5px dashed var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--faint);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Sections */
+    section { margin-bottom: 2.75rem; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 0.5px solid var(--rule);
+    }
+
+    /* Education */
+    .edu-list { display: flex; flex-direction: column; gap: 0.45rem; }
+    .edu-item { display: flex; gap: 1.5rem; font-size: 0.88rem; }
+    .edu-year { color: var(--faint); width: 38px; flex-shrink: 0; }
+    .edu-text { color: var(--muted); }
+    .edu-text strong { color: var(--ink); font-weight: 500; }
+
+    /* Research sublabels */
+    .sub-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 0.6rem;
+    }
+    .sub-label + .sub-label { margin-top: 1.5rem; }
+
+    /* Publications */
+    .pub {
+      padding: 0.9rem 0;
+      border-bottom: 0.5px solid var(--rule);
+    }
+    .pub:last-of-type { border-bottom: none; }
+    .pub-meta {
+      font-size: 0.75rem;
+      color: var(--faint);
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.02em;
+    }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+    .pub-title a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--rule);
+      transition: border-color 0.15s;
+    }
+    .pub-title a:hover { border-color: var(--ink); }
+    .pub-venue {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .pub-venue em {
+      font-family: var(--serif);
+      font-style: italic;
+    }
+    .pub-coauth {
+      font-size: 0.8rem;
+      color: var(--faint);
+      margin-top: 0.2rem;
+    }
+    .footnote {
+      font-size: 0.76rem;
+      color: var(--faint);
+      margin-top: 1.25rem;
+    }
+
+    /* Teaching */
+    .course {
+      padding: 0.85rem 0;
+      border-bottom: 0.5px solid var(--rule);
+    }
+    .course:last-child { border-bottom: none; }
+    .course-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .course-title a {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--rule);
+      transition: border-color 0.15s;
+    }
+    .course-title a:hover { border-color: var(--ink); }
+    .course-code {
+      font-size: 0.74rem;
+      color: var(--faint);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0.35rem 0.75rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .contact-grid .lbl {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--faint);
+      padding-top: 3px;
+    }
+    .contact-grid a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--rule);
+      transition: border-color 0.15s;
+    }
+    .contact-grid a:hover { border-color: var(--ink); }
+    .contact-grid span { color: var(--muted); }
+
+    /* Bean section */
+    .bean-section { margin-bottom: 0; }
+    .bean-wrap {
+      margin-top: 1rem;
+      width: 100%;
+      max-width: 340px;
+    }
+    .bean-wrap img {
+      width: 100%;
+      border-radius: 6px;
+      border: 0.5px solid var(--rule);
+      display: block;
+    }
+    .bean-placeholder {
+      width: 100%;
+      max-width: 340px;
+      height: 220px;
+      border-radius: 6px;
+      border: 0.5px dashed var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    .bean-caption {
+      font-size: 0.78rem;
+      color: var(--faint);
+      margin-top: 0.5rem;
+      font-style: italic;
+      font-family: var(--serif);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar-wrap, .avatar-placeholder { display: none; }
+      nav { flex-direction: column; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <nav>
+      <a class="nav-name" href="#">Daniel Kolliner</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <!-- ABOUT -->
+    <div class="hero" id="about">
+      <div>
+        <p class="role">Wright Family Assistant Professor of Economics</p>
+        <p class="inst">Kenyon College</p>
+        <h1>Daniel Kolliner</h1>
+        <p>I am an applied microeconomist with interests in political economy and public economics. My research examines how political institutions shape the distribution of public goods and services, and what policies may mitigate distortions in that distribution. I leverage quasi-experimental research designs and creative uses of underused public data sources to estimate causal effects.</p>
+        <p>Prior to Kenyon, I earned my Ph.D. at the University of Maryland. I have also worked at the Federal Reserve Bank of Cleveland and as a risk analyst.</p>
+      </div>
+      <div class="avatar-wrap">
+        <!--
+          HEADSHOT: Replace the placeholder div below with an <img> tag once you have a photo.
+          Example:
+            <img src="headshot.jpg" alt="Daniel Kolliner">
+          Place headshot.jpg in the same folder as this index.html file.
+        -->
+        <div class="avatar-placeholder">Your<br>photo<br>here</div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <section>
+      <p class="section-label">Education</p>
+      <div class="edu-list">
+        <div class="edu-item">
+          <span class="edu-year">2022</span>
+          <span class="edu-text"><strong>Ph.D.</strong>, University of Maryland</span>
+        </div>
+        <div class="edu-item">
+          <span class="edu-year">2012</span>
+          <span class="edu-text"><strong>B.A.</strong>, Oberlin College</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <p class="section-label">Research</p>
+
+      <p class="sub-label">Revise &amp; Resubmit</p>
+
+      <div class="pub">
+        <p class="pub-meta">Political Economy</p>
+        <p class="pub-title">
+          <a href="http://econweb.umd.edu/~kaplan/Gerrymandering-Full.pdf">"Political Control Over Redistricting and the Partisan Balance in Congress"</a>
+        </p>
+        <p class="pub-venue">Revise &amp; Resubmit, <em>Journal of Public Economics</em></p>
+        <p class="pub-coauth">With Kenneth Coriale and Ethan Kaplan</p>
+      </div>
+
+      <div class="pub">
+        <p class="pub-meta">Public Economics</p>
+        <p class="pub-title">"The Effect of Place-Based Subsidies on Workplace and Resident Employment: Evidence from Firm-Level Awards in the U.S."</p>
+        <p class="pub-venue">Revise &amp; Resubmit, <em>Contemporary Economic Policy</em></p>
+        <p class="pub-coauth">With Zachary Kobban<sup>*</sup></p>
+      </div>
+
+      <p class="sub-label" style="margin-top:1.5rem">Working Papers</p>
+
+      <div class="pub">
+        <p class="pub-title">"Local Distributive Politics: Party Affiliation, Unification, and State Intergovernmental Transfers"</p>
+        <p class="pub-venue" style="margin-top:0.2rem">Under review</p>
+      </div>
+
+      <p class="sub-label" style="margin-top:1.5rem">Works in Progress</p>
+
+      <div class="pub">
+        <p class="pub-title">"Forward Looking Congress? Evidence from Redistricting Announcements"</p>
+      </div>
+
+      <div class="pub">
+        <p class="pub-title">"Partisan Redistricting and Congressional Polarization"</p>
+        <p class="pub-coauth">With Anthony Fowler and Ethan Kaplan</p>
+      </div>
+
+      <div class="pub">
+        <p class="pub-title">"The Effect of Daily Newspaper Openings and Closures on Local Public Finance"</p>
+        <p class="pub-coauth">With Andrew Mayer<sup>*</sup></p>
+      </div>
+
+      <p class="footnote"><sup>*</sup> Undergraduate co-author</p>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <p class="section-label">Teaching</p>
+
+      <div class="course">
+        <div class="course-header">
+          <span class="course-title"><a href="https://docs.google.com/spreadsheets/d/1dqmOjmI7NLYnaQz-ZmdWsxvSk0JBYI_fdJJpp6TUtEY/edit?usp=sharing" target="_blank" rel="noopener">Principles of Microeconomics ↗</a></span>
+          <span class="course-code">ECON 101</span>
+        </div>
+      </div>
+
+      <div class="course">
+        <div class="course-header">
+          <span class="course-title"><a href="https://docs.google.com/spreadsheets/d/10V01Pdm4TGuB9n8o_wqmlJNmKQ74aPVURpndErybZiU/edit?usp=sharing" target="_blank" rel="noopener">Principles of Macroeconomics ↗</a></span>
+          <span class="course-code">ECON 102</span>
+        </div>
+      </div>
+
+      <div class="course">
+        <div class="course-header">
+          <span class="course-title"><a href="https://docs.google.com/spreadsheets/d/1P-9DjXWlQlM4kbKrRxFfBVDJX2KRqjCL0mljdYv-W5c/edit?usp=sharing" target="_blank" rel="noopener">Political Economy ↗</a></span>
+          <span class="course-code">ECON 476</span>
+        </div>
+      </div>
+
+      <div class="course">
+        <div class="course-header">
+          <span class="course-title"><a href="https://docs.google.com/spreadsheets/d/15bUL5jF8i7dx-VOmOOLYlJeC-dp8KbLXarc8spk0aCk/edit?usp=sharing" target="_blank" rel="noopener">Economic Institutions ↗</a></span>
+          <span class="course-code">ECON 391</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <p class="section-label">Contact</p>
+      <div class="contact-grid">
+        <span class="lbl">Email</span>
+        <a href="mailto:kolliner1@kenyon.edu">kolliner1@kenyon.edu</a>
+        <span class="lbl">Office</span>
+        <span>Ascension Hall 302</span>
+        <span class="lbl">Address</span>
+        <span>Department of Economics, Kenyon College, Gambier, Ohio 43022</span>
+      </div>
+    </section>
+
+    <!-- BEAN -->
+    <section class="bean-section">
+      <p class="section-label">Bean</p>
+      <!--
+        BEAN PHOTO: Replace the placeholder div below with an <img> tag once you have a photo.
+        Example:
+          <div class="bean-wrap"><img src="bean.jpg" alt="Bean"></div>
+        Place bean.jpg in the same folder as this index.html file.
+      -->
+      <div class="bean-placeholder">Bean's photo here</div>
+      <p class="bean-caption">Bean</p>
+    </section>
+
+  </div>
+</body>
+</html>
